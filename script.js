@@ -80,7 +80,7 @@ function onSave(){
 let nam = ''; 
 let lvl = 1;
 
-but1.onclick = () => { nam = prompt('Enter character name\n(30 characters only)'); plnam.textContent = nam.slice(0,30); buttSave.disabled = false; Inn()}
+but1.onclick = () => { nam = prompt('Enter character name\n(12 characters only)'); plnam.textContent = nam.slice(0,12); buttSave.disabled = false; Inn()}
 but2.style.visibility = 'hidden'
 but3.style.visibility = 'hidden'
 but4.style.visibility = 'hidden'
@@ -516,7 +516,7 @@ function instanceForrest(){
    use(but3,'Leave the forrest')
 
    but1.onclick = () => {
-      text.textContent = 'You have trouble breathimg through all the smoke'
+      text.textContent = 'You have trouble breathing through all the smoke'
       use(but1, 'Continue into the forrest')
       use(but2, 'Run away from the forrest')
       but3.style.visibility = 'hidden'

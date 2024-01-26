@@ -1,87 +1,65 @@
 html{
-   font-size: 2em;
+   box-sizing: border-box;
+   font-size: 2rem;
+}
+*,*.before,*.after{
+   box-sizing: inherit;
 }
 body{
    background-image: url("parchment_img.jpeg");
    background-repeat: repeat;
-   background-size: 100% 100%;
+   text-align: center;
+   width: auto;
 }
 img{
    width: 1rem;
 }
 header{
-   position: fixed;
-   width: 100%;
-   padding: 10px 16px;
-   /* background-color: bisque; */
-   /* background-image: url("stonewall.jpeg");
-   background-repeat: repeat; */
-}
-#plName{
-   display: inline-block;
-   width: 40%;
-   /* background-color: green; */
+   display: flex;
+   align-items: center;
+   flex-direction: column;
 }
 #stats{
-   display: inline-block;
-   width: 15%;
-   text-align: center;
-   /* background-color: red; */
+   margin: 0%;
 }
-#wpn {
-   display: inline-block;
-   width: 29%;
-   /* background-color: blue; */
+#sect{
+   display: flex;
+   align-items: center;
+   flex-direction:column;
    text-align: center;
 }
-#sect_1 {
-   position: relative;
-   top: 5rem;
+#sect >pre{
+   text-wrap: wrap;
+   justify-content: center;
 }
-#content{
-   text-align: center;
-}
-#save, #load{
+button{
    font-size: 1rem;
    margin: 0.1rem;
-   text-decoration: none; 
-   border: none; 
-   color: black;
+   height: fit-content;
+   border: none;
    border-radius: 5px; 
    box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
    cursor: pointer; 
-   outline: none; 
-   transition: 0.2s all; 
    background-image: url("woodpanel_img.jpeg");
    background-repeat: repeat;
 }
-.toggles:disabled {
-   -webkit-text-fill-color: #634a16;
+button:disabled {
+   color: #634a16;
    background-image: url("parchment_img.jpeg");
    background-repeat: repeat;
 }
-#sect_2{
-   position: relative;
-   top: 6rem;
-   text-align: center;
-   /* background-color:chartreuse; */
-}
-.button{
-   font-size: 1rem;
-   margin-top: 1rem;
-   color: black;
-   /* background-color: #3A1F04; */
-   text-decoration: none; 
-   border: none; 
-   border-radius: 5px; 
-   box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
-   cursor: pointer; 
-   outline: none; 
-   transition: 0.2s all; 
-   background-image: url("woodpanel_img.jpeg");
-   background-repeat: repeat;
-}
-.button:active {
+button:active {
    transform: scale(0.98); 
    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+}
+#plName {
+   text-wrap: wrap;
+}
+@media (min-width:1200px){ 
+   header{
+      flex-direction: row;
+   }
+   #plName, #stats, #wpn{
+      flex-grow: 1;
+   }
 }
