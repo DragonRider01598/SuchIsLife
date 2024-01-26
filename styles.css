@@ -55,7 +55,7 @@ button:active {
 #plName {
    text-wrap: wrap;
 }
-@media (min-width:1200px){ 
+@media (min-width:1000px){ 
    header{
       flex-direction: row;
    }
