@@ -1,6 +1,6 @@
 html{
    box-sizing: border-box;
-   font-size: 2rem;
+   font-size: 1rem;
 }
 *,*.before,*.after{
    box-sizing: inherit;
