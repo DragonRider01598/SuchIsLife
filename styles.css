@@ -1,15 +1,29 @@
+.light{
+   --buttonBG : #12c;
+   --buttonTxt: #ced6d6;
+   --buttonDisBG: #bababa;
+   --bg: rgb(245, 247, 230);
+   --txt: black;
+}
+.dark{
+   --buttonBG : #1c2de6;
+   --buttonTxt: #ced6d6;
+   --buttonDisBG: #2e2d2d;
+   --bg: #424242;
+   --txt: #fff;
+}
+.mode{
+   cursor: pointer;
+}
 html{
    box-sizing: border-box;
    font-size: 1.5rem;
 }
-*,*.before,*.after{
-   box-sizing: inherit;
-}
 body{
-   background-image: url("parchment_img.jpeg");
-   background-repeat: repeat;
    text-align: center;
    width: auto;
+   background-color: var(--bg);
+   color: var(--txt);
 }
 img{
    width: 1rem;
@@ -19,14 +33,18 @@ header{
    align-items: center;
    flex-direction: column;
 }
-#stats{
-   margin: 0%;
-}
 #sect{
+   width: 60%;
+   padding: 30px;
+   margin: 20px;
    display: flex;
+   margin-right: auto;
+   margin-left: auto;
    align-items: center;
    flex-direction:column;
    text-align: center;
+   border: 3px solid var(--buttonBG);
+   border-radius: 10px;
 }
 #sect >pre{
    text-wrap: wrap;
@@ -38,15 +56,13 @@ button{
    height: fit-content;
    border: none;
    border-radius: 5px; 
-   box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24); 
-   cursor: pointer; 
-   background-image: url("woodpanel_img.jpeg");
-   background-repeat: repeat;
+   background-color: var(--buttonBG);
+   color: var(--buttonTxt);
+   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.24); 
+   cursor: pointer;
 }
 button:disabled {
-   color: #634a16;
-   background-image: url("parchment_img.jpeg");
-   background-repeat: repeat;
+   background-color: var(--buttonDisBG);
 }
 button:active {
    transform: scale(0.98); 
@@ -55,11 +71,21 @@ button:active {
 #plName {
    text-wrap: wrap;
 }
+header>p{
+   margin: 3px;
+}
+footer > a > img{
+   width: 80px;
+}
 @media (min-width:1200px){ 
    header{
       flex-direction: row;
+      
    }
    #plName, #stats, #wpn{
-      flex-grow: 1;
+      flex-grow: 0.5;
+   }
+   header>p{
+      margin: 20px;
    }
 }

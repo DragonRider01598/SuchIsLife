@@ -21,11 +21,34 @@ const but3 = document.querySelector('#butt-3')
 const but4 = document.querySelector('#butt-4')
 const buttSave = document.querySelector('#save')
 const buttLoad = document.querySelector('#load')
+const mode = document.querySelector('.mode')
 
+
+mode.onclick = changeMode
 buttLoad.onclick = onLoad
 buttSave.onclick = onSave
 
 buttSave.disabled = true
+
+const savedTheme = localStorage.getItem('mode');
+if (savedTheme) {
+   document.body.classList.add(savedTheme);
+}else{
+   document.body.classList.add('light')
+}
+
+function changeMode(){
+   const body = document.body;
+   if (body.classList.contains('light')) {
+      body.classList.remove('light');
+      body.classList.add('dark');
+      localStorage.setItem('mode', 'dark');
+   } else {
+      body.classList.remove('dark');
+      body.classList.add('light');
+      localStorage.setItem('mode', 'light');
+   }
+}
 
 let saveExists = JSON.parse(localStorage.getItem('GridLock'))
 if(saveExists == null || saveExists == undefined){
