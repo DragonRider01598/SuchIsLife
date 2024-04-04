@@ -22,7 +22,8 @@ const but4 = document.querySelector('#butt-4')
 const buttSave = document.querySelector('#save')
 const buttLoad = document.querySelector('#load')
 const mode = document.querySelector('.mode')
-
+const crownImg = document.querySelector('#crownImg')
+const crownCount = document.querySelector('#crown')
 
 mode.onclick = changeMode
 buttLoad.onclick = onLoad
@@ -71,6 +72,8 @@ function onLoad(){
          pts.textContent = saveGame.pot_s
          buttLoad.disabled = true
          buttSave.disabled = false
+         crowns = saveGame.crown
+         checkCrown()
          Inn()
       }
    }
@@ -92,16 +95,23 @@ function onSave(){
          attack_2: atk2,
          weapon_1: wpn1.textContent,
          weapon_2: wpn2.textContent,
-         level: lvl
+         level: lvl,
+         crown: crowns
       }
       localStorage.setItem('GridLock',JSON.stringify(saveNew))
       alert('Your progress was saved')
       location.reload() 
    }
 }
+function checkCrown(){
+   if(crowns > 0){
+      crownImg.src = crownURL
+      crownCount.textContent = crowns + 'x';
+   }
+}
 
 let nam = ''; 
-let lvl = 1;
+let lvl = 0;
 
 but1.onclick = () => { nam = prompt('Enter character name\n(12 characters only)'); plnam.textContent = nam.slice(0,12); buttSave.disabled = false; Inn()}
 but2.style.visibility = 'hidden'
@@ -112,6 +122,8 @@ const text = document.querySelector('#content')
 
 let atk1 = 2
 let atk2 = 3
+
+let crowns = 0
 
 const hp = document.querySelector('#hp')
 const pts = document.querySelector('#pts')
@@ -157,6 +169,17 @@ function death(){
    text.textContent = 'Hope you had a good time!\nTo play again just refresh the page'
    but1.style.visibility = 'hidden'
 }
+function ascention(){
+   text.textContent = 'You have finally reached a zenith\nYou decide to retire to a quiet lodge in the woods\n...or do you?'
+   use(but1, 'To adventure!')
+
+   but1.onclick = () =>{
+      lvl = 0 
+      crowns = Number(crowns) + 1
+      checkCrown()
+      Inn()
+   }
+}
 function cont(instance = randInst()){ 
    but1.textContent = 'Continue'
    but1.onclick = instance
@@ -178,6 +201,10 @@ function cont(instance = randInst()){
       but2.style.visibility = 'hidden'
       but3.style.visibility = 'hidden'
       but4.style.visibility = 'hidden'
+   }
+
+   if(lvl >= 100){
+      ascention()
    }
 }
 function setHP(num){
@@ -1166,3 +1193,5 @@ function advice(){
    }
    cont()
 }
+
+const crownURL = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFVElEQVR4nO1ZW0wcVRj+oUqrqVi1hgd9QFgKg1UC9skGqyiiLfbBFKOBcmktl1hNfDYxmBijhktiNGrSpj7sQrJeFqulaWvBRKlt0t3FhhZ2ZwFvVdumjYS2gAE+c2Znd9me2RvMmdF1vuRLNjszZ873nf//zz8zRBYsWLBgwYIFCwYB/bQadnoFdjoJB11VyH730MvsGKUz8AndAwcNw0FAfwlwqhkYqgMcGVD+c5CXnUNpu/IOGoYzG5i0IwondoYMCJqQjpEAFvZM4I3ieQMY91K6AXY6pYR9GItBM6JTIMQfKN0AO00rOR8CEx8tOkI7TVO6VW0wA1ioxw77pZwyen7Cq7aSAuw6dr122KecAkJ3FehctZUViS045SIofFeBzlVbnbA3CfFeOCnL6PkZUrWVkO3JOBNTfG/GaEopJXJXgaCqDV/9PgyVAwdzgN6bg/wyBxjIBdyFh8yen9CqjbONBQi0zGK8DVEcfRbwSEG6pcfN3FXEVm159xFOfKAFGC5dYkCRB6BMM+a3/KrtuuNNSgD46yoRaFvkDDi7NSI+YsLzCcdzZr2u566y/Krdtx4INE/Bv6s25ligDMh7fuTEy7sB70YNA6RJ+G0xty54pK1wF17G52ug164Sr9HwxhU/Wq+GctsifI12jNRwN4Ncv5cTzzhSwYuPRMGr3DhOWgW31A63tMDOmfvehtne1fHFr/TxGk7KYiHE8giOjJlw1WaVnOUvl9N7vBiruy98/UjNWsgtf3Ln+XcCnuJ4BlzBSPGd4XE8trvhlo4uPeePYwXwu/Jw4dP1mOldgwVHJqv412GnE8qcl7vysYCJuhLNleRCu/Uv+Ot3KNf4Grs1zzmzObb4CN9WxnBLj8Aj/X7j8YmvbPC58qPo77MVkyhgsmFdUgYokdC6AF/DfgRar3HHxmqSEc84A6/UDk/R31rH/X35vAH9tmxhBjBAbrmetAnaxgDDDyVrQEzOn5Y48T5XnvjHaMjNv/LF7IlgRU/GgHPPrFg84+zJIn71Xfnj4g0IvOjWzGdvCeB7IUFtaAK8D+hiwNWhQq38HxJvgH/XYT4CHlMnVhxsbFiYa4kf3hSn6qdmwNR3Gga48r8wwICmA3w3VxU9QSb0XDUw9lyw4LEU0Wp4VsDLgxs4A+S+vA8MMKDhLT6vt+sqLhle+KaAN+Bg/mviDRhreInf1nYYbsD5I7wBgb68JvEGyLXbOQN8tYYb8HM/3wRNHLQ9Kd6ACY1ukBU4gw0wvAuM2w2yZwKDDTClC4zbDXofNEy8aV1g3G4w3h6vM03rAhN2gwYZYFoXmFw3KJ6mdYEpdYMCaVoXGL8b1OcpLxlePL7BpC7QWbwWx7a8j8GnruDbakTx6/uTfUO7Yl78kODriKbcnXlpvIvePf8x3SpO/EDlCCc8RNe9hhkwtY83IMRAF50WYgLYyscSf7wS6LnJMAMW7ITx7tgmjHfTO/obcHTLb5riB58GPrvLMPEhXjtA8HdqGyB30aT+BvRkzeHQRmCgKiL88CbAeVtKE5/eT/jlPWWSMVdQB87pb4CdAmEh7NtA/G9xmrz0kVDRYfo7RESAnd5YSciylTdCvJICnSJqgJNuUb+4LMsAFvaGrH6noF0gbIKD2uEgGXaaT8UAkTk/1kHzvk76ia28MPEWLFiwYCExVhERezGZQ0S5RCQRURkRbSaiciJ6lIgqiIi9vq4iomqVVep/Feo55eo1ZeoYueqY2eo9/lVYR0TF6qS3LRElitvUe0nqvU1FmQGCE7HUTANK/+8GMNyuhqMZKcDu/Z8ogg8vowiya4QXwX8ApNyobZBDlqEAAAAASUVORK5CYII='
